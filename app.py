@@ -4,7 +4,7 @@ from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 from dotenv import find_dotenv, load_dotenv
 import requests
-from playsound import playsound
+#from playsound import playsound
 import os
 from flask import Flask, render_template, request
 app = Flask(__name__)
@@ -63,7 +63,7 @@ def get_voice_message(message):
     if response.status_code == 200 and response.content:
         with open('audio.mp3','wb') as f:
             f.write(response.content)
-        playsound('audio.mp3')
+        #playsound('audio.mp3')
         return response.content
 
 @app.route("/")
