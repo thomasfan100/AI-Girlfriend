@@ -7,12 +7,12 @@
 
 </head>
 <body>
-    <audio controls src="audio.mp3">
+    
     <div class = "main">
         <h1 class = "title"> AI Girlfriend </h1>
         <img class = "gf" src="/static/gf.png">
         <div id = "gather">
-            <form method="POST" action = "/send_message">
+            <form method="POST" action = "/static/send_message">
             <input class = "input" type="text" name="human_input" placeholder="Type your message..." >
             <button type="submit" class = "btn" id="submitButton">Send</button>
             </form>
@@ -20,6 +20,7 @@
         </div>
         <div id="response_message"></div>
     </div>
+    <audio controls><source src="../static/audio.mp3"></audio> 
 
 
     <!-- --------------------script---------------- -->
