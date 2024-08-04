@@ -63,7 +63,7 @@ def get_voice_message(message):
     if response.status_code == 200 and response.content:
         with open('audio.mp3','wb') as f:
             f.write(response.content)
-        playsound('audio.mp3')
+        #playsound('audio.mp3')
         return response.content
 
 @app.route("/")
