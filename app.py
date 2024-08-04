@@ -4,7 +4,7 @@ from langchain.prompts import PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 from dotenv import find_dotenv, load_dotenv
 import requests
-from playsound import playsound
+#from playsound import playsound
 import os
 from flask import Flask, render_template, request
 app = Flask(__name__)
