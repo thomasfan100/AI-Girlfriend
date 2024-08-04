@@ -62,9 +62,9 @@ def get_voice_message(message):
     }
     response = requests.post("https://api.elevenlabs.io/v1/text-to-speech/kPzsL2i3teMYv0FxEYQ6",json=payload, headers = headers)
     if response.status_code == 200 and response.content:
-        with open('audio.mp3','wb') as f:
+        with open('./static/audio.mp3','wb') as f:
             f.write(response.content)
-        playsound('audio.mp3')
+        playsound('./static/audio.mp3')
         return response.content
 
 @app.route("/")
