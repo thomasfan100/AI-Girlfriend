@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chatbot</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/styles.css') }}">
+
+</head>
+<body>
+    <div class = "main">
+        <h1 class = "title"> AI Girlfriend </h1>
+        <img class = "gf" src="/static/gf.png">
+        <div id = "gather">
+            <form method="POST" action = "/send_message">
+            <input class = "input" type="text" name="human_input" placeholder="Type your message..." >
+            <button type="submit" class = "btn" id="submitButton">Send</button>
+            </form>
+            <button class = "btn" id="startStopButton">Start Listening</button>
+        </div>
+        <div id="response_message"></div>
+    </div>
+
+
+    <!-- --------------------script---------------- -->
+    <script>
+        const form = document.querySelector('form');
+        const responseMessage = document.getElementById('response_message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent the form from submitting the traditional way
+            const formData = new FormData(form);
+            fetch('/send_message', {
+                method:'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                responseMessage.innerHTML = data;
+            });
+            form.reset();
+        });
+    </script>
+
+    <script>
+        const startStopButton = document.getElementById('startStopButton');
+        const inputField = document.querySelector('input[name="human_input"]'); // Select the input field
+
+        const SpeechRecognition = window.SpeechRecongition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.interimResults = true;
+        recognition.continuous = true;
+        let listening = false;
+        recognition.onresult = (event) => {
+            let transcript = '';
+            for (let i = event.resultIndex; i < event.results.length; i++) {
+                transcript += event.results[i][0].transcript;
+            }
+
+            inputField.value = transcript;
+        };
+
+        recognition.onerror = (event) => {
+            console.error("Speech recognition error", event)
+        }
+
+        recognition.onend = () => {
+            listening = false;
+            startStopButton.textContent = 'Start Listening'
+        }
+
+        startStopButton.addEventListener('click', () => {
+            if (listening) {
+                recognition.stop();
+                listening = false;
+                startStopButton.textContent = 'Start Listening'
+                submitButton.click();
+            } else {
+                recognition.start();
+                listening = true;
+                startStopButton.textContent = 'Stop Listening'
+                
+            }
+        })
+    </script>
+</body>
+</html>
+
+<!-- submitButton.click(); -->
