@@ -14,12 +14,17 @@ body {
     color: rgb(255, 94, 120);
     font-size: 60px;
 }
+.main{
+    display: flex;
+    flex-direction: column;
+}
 .main h1{
     margin: auto;
 }
 .gf{
     width: 500px;
     height: auto;
+    margin: auto;
 }
 .btn {
     padding: 10px 20px;
@@ -49,4 +54,16 @@ body {
     max-width: 600px;
     margin: 20px auto;
     min-height: 50px;
+}
+#response_message{
+    width: 100%;
+    border-style: dotted;
+    border-color: beige;
+    border-radius: 3%;
+    border-color: pink;
+    border-width: 10px;
+    background-color: rgb(252, 252, 237);
+    color: rgb(255, 94, 120);
+    font-size: 20px;
+    margin: auto;
 }
